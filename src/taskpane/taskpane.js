@@ -12,6 +12,7 @@ Office.onReady((info) => {
     document.getElementById("run-pink").onclick = run_pink;
     document.getElementById("run-yellow").onclick = run_yellow;
     document.getElementById("run-blue").onclick = run_blue;
+    document.getElementById("run-green").onclick = run_green;
   }
 });
 
@@ -71,6 +72,28 @@ export async function run_blue() {
 
       // Update the fill color
       range.format.fill.color = "blue";
+
+      await context.sync();
+      console.log(`The range address was ${range.address}.`);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function run_green() {
+  try {
+    await Excel.run(async (context) => {
+      /**
+       * Insert your Excel code here
+       */
+      const range = context.workbook.getSelectedRange();
+
+      // Read the range address
+      range.load("address");
+
+      // Update the fill color
+      range.format.fill.color = "green";
 
       await context.sync();
       console.log(`The range address was ${range.address}.`);
